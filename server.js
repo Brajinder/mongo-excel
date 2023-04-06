@@ -12,7 +12,7 @@ app.get('/importToMongo', async (req, res) => {
     const xlFile = xlsx.readFile("./excel.xlsx");
     const sheet = xlFile.Sheets[xlFile.SheetNames[0]];
     const json = xlsx.utils.sheet_to_json(sheet);
-    await excelSchema.save(json).then((result) => {
+    await excelSchema.insertMany(json).then((result) => {
         if (result.length > 0) {
             res.send({ msg: "success" });
         }
